@@ -10,13 +10,12 @@
  * Jamie337nichols@gmail.com
  *
  * Description
- * 
+ *
  *
  * Dependencies
- * 
+ *
  */
-require(['Launcher'],function(Launcher){
 
-    var launcher = new Launcher("Tile Game",800,600);
-
+require(["Launcher"], function (Launcher) {
+  var launcher = new Launcher("Tile Game", 800, 600);
 });

@@ -21,14 +21,5 @@ define(["Class", "ImageLoader", "SpriteSheet"], function (
   Assets.getAssets = function (_name) {
     return assets[_name];
   };
-  var ast = new Assets(
-    "test",
-    "https://img.favpng.com/12/1/12/rpg-maker-mv-rpg-maker-vx-role-playing-video-game-role-playing-game-sprite-png-favpng-BvHprcqt334DFDa9mTaRs4pzC.jpg",
-    Assets.DEFAULT_WIDTH,
-    Assets.DEFAULT_HEIGHT
-  );
-  var ast = new Assets("mario", "res/textures/mario.png", 28, 42);
-  ast.idle = ast.sheet.crop(3, 0, 28, 42);
-
   return Assets;
 });

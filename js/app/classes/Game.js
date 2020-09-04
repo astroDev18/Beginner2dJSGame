@@ -1,8 +1,14 @@
-define(["Class", "Display"], function (Class, Display) {
+define(["Class", "Display", "Assets"], function (Class, Display, Assets) {
   var _this;
   var running = false;
   var title, width, height, g, display;
-
+  var ast = new Assets(
+    "test",
+    "https://img.favpng.com/12/1/12/rpg-maker-mv-rpg-maker-vx-role-playing-video-game-role-playing-game-sprite-png-favpng-BvHprcqt334DFDa9mTaRs4pzC.jpg",
+    Assets.DEFAULT_WIDTH,
+    Assets.DEFAULT_HEIGHT
+  );
+  var img = ast.sheet.crop(20, 10, 82, 62);
   var Game = Class.extend({
     init: function (_title, _width, _height) {
       _this = this;
@@ -16,14 +22,11 @@ define(["Class", "Display"], function (Class, Display) {
     display = new Display(title, width, height);
     g = display.getGraphics();
   }
-  var x = 20;
-  var y = 30;
-  function tick(_td) {
-    x += 20 * _td;
-  }
+
+  function tick(_td) {}
   function render() {
     g.clearRect(0, 0, width, height);
-    g.fillRect(x, y, 200, 50);
+    g.myDrawImage(img, 10, 15, 42, 42);
   }
 
   Game.prototype.run = function () {

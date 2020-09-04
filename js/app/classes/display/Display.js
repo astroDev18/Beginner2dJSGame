@@ -41,6 +41,28 @@ define(["Jquery", "Class"], function ($, Class) {
   Display.prototype.getGraphics = function () {
     return graphics;
   };
+  // allows us to pass in an asset with x and y so we can use it in draw function
+  // we are adding extra functionality to default draw image so we can pass it extra info
+  // like sheet size and cropping
+  CanvasRenderingContext2D.prototype.myDrawImage = function (
+    asset,
+    _x,
+    _y,
+    _width,
+    _height
+  ) {
+    this.drawImage(
+      asset.sheet,
+      asset.x,
+      asset.y,
+      asset.width,
+      asset.height,
+      _x,
+      _y,
+      _width,
+      _height
+    );
+  };
 
   return Display;
 });

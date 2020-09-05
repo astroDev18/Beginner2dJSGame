@@ -1,16 +1,20 @@
-define(["Class", "TileLoader"], function (Class, Tile) {
+define(["Class", "TileLoader", "Utils"], function (Class, Tile, Utils) {
   var World = Class.extend({
     init: function (_path) {
       this.tiles = [];
-      this.width = 20;
-      this.height = 20;
       this.loadWorld(_path);
     },
     loadWorld: function (_path) {
-      for (x = 0; x < this.width; x++) {
-        for (y = 0; y < this.height; y++) {
+      var file = Utils.loadFileAsString(_path);
+      var tokens = file.replace(/\n/g, " ").split(" ");
+      this.width = tokens[0];
+      this.height = tokens[1];
+      this.spawnX = tokens[2] * Tile.TILEWIDTH;
+      this.spawnY = tokens[3] * Tile.TILEHEIGHT;
+      for (y = 0; y < this.height; y++) {
+        for (x = 0; x < this.width; x++) {
           if (!this.tiles[x]) this.tiles[x] = [];
-          this.tiles[x][y] = 1;
+          this.tiles[x][y] = parseInt(tokens[x + y * this.width + 4]);
         }
       }
     },
@@ -26,8 +30,9 @@ define(["Class", "TileLoader"], function (Class, Tile) {
         }
       }
     },
-    getTile: function (x, y) {
-      return Tile.tiles[this.tiles[x][y]];
+
+    getTile: function (_x, _y) {
+      return Tile.tiles[this.tiles[_x][_y]];
     },
   });
   return World;

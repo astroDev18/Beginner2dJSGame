@@ -2,7 +2,9 @@ define(["Class"], function (Class) {
   var currentState = null;
 
   var State = Class.extend({
-    init: function () {},
+    init: function (_handler) {
+      this.handler = _handler;
+    },
   });
 
   State.prototype.tick = function (_dt) {};

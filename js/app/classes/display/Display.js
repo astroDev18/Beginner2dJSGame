@@ -9,6 +9,20 @@ define(["Jquery", "Class"], function ($, Class) {
       height = _height;
       createDisplay();
     },
+
+    // Getters
+    getTitle: function () {
+      return title;
+    },
+    getWidth: function () {
+      return width;
+    },
+    getHeight: function () {
+      return height;
+    },
+    getGraphics: function () {
+      return graphics;
+    },
   });
 
   // Private Method
@@ -26,21 +40,6 @@ define(["Jquery", "Class"], function ($, Class) {
 
   // Getters
 
-  Display.prototype.getTitle = function () {
-    return title;
-  };
-
-  Display.prototype.getWidth = function () {
-    return width;
-  };
-
-  Display.prototype.getHeight = function () {
-    return height;
-  };
-
-  Display.prototype.getGraphics = function () {
-    return graphics;
-  };
   // allows us to pass in an asset with x and y so we can use it in draw function
   // we are adding extra functionality to default draw image so we can pass it extra info
   // like sheet size and cropping

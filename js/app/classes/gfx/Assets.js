@@ -27,8 +27,28 @@ define(["Class", "ImageLoader", "SpriteSheet"], function (
     Assets.DEFAULT_WIDTH,
     Assets.DEFAULT_HEIGHT
   );
-  var ast = new Assets("player", "res/textures/mario.png", 28, 42);
-  ast.idle = ast.sheet.crop(3, 0, 28, 42);
 
+  // Player Asset
+  var player = new Assets("player", "res/textures/mario.png", 28, 42);
+  player.idle = player.sheet.crop(3, 0, 28, 42);
+  //   player.idle = ast.sheet.crop(3, 0, 28, 42);
+
+  // Tile Asset
+  var tiles = new Assets("tiles", "res/textures/tiles.png", 30, 30);
+  tiles.dirt = tiles.sheet.crop(
+    0,
+    tiles.height * 10,
+    tiles.width,
+    tiles.height
+  );
+
+  tiles.grass = tiles.sheet.crop(0, tiles.height, tiles.width, tiles.height);
+
+  tiles.stone = tiles.sheet.crop(
+    0,
+    tiles.height * 7,
+    tiles.width,
+    tiles.height
+  );
   return Assets;
 });

@@ -30,7 +30,7 @@ define([
     },
     run: function () {
       init();
-      var fps = 30;
+      var fps = 60;
       var timePerTick = 1000 / fps;
       var delta = 0;
       var now;

@@ -10,7 +10,7 @@ define(["State", "Player", "TileLoader", "World"], function (
     init: function (_handler) {
       this._super(_handler);
       this.player = new Player(_handler, 20, 20);
-      this.world = new World("res/worlds/world1.wrd");
+      this.world = new World("res/worlds/world1.wrd", _handler);
     },
 
     tick: function (_dt) {

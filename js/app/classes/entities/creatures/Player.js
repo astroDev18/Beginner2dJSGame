@@ -13,12 +13,13 @@ define(["Creature", "Assets"], function (Creature, Assets) {
     tick: function (_dt) {
       this.getInput(_dt);
       this.move();
+      this.handler.getGameCamera().centerOnEntity(this);
     },
     render: function (_g) {
       _g.myDrawImage(
         this.assets.idle,
-        this.x,
-        this.y,
+        this.x - this.handler.getGameCamera().getxOffset(),
+        this.y - this.handler.getGameCamera().getyOffset(),
         this.assets.width,
         this.assets.height
       );

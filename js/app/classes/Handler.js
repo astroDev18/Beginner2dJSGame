@@ -14,6 +14,9 @@ define(["Class"], function (Class) {
     getKeyManager: function () {
       return game.getKeyManager();
     },
+    getGameCamera: function () {
+      return game.getGameCamera();
+    },
   });
 
   return Handler;

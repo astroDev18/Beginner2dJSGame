@@ -1,8 +1,9 @@
 define(["Class", "TileLoader", "Utils"], function (Class, Tile, Utils) {
   var World = Class.extend({
-    init: function (_path) {
+    init: function (_path, _handler) {
       this.tiles = [];
       this.loadWorld(_path);
+      this.handler = _handler;
     },
     loadWorld: function (_path) {
       var file = Utils.loadFileAsString(_path);
@@ -24,8 +25,8 @@ define(["Class", "TileLoader", "Utils"], function (Class, Tile, Utils) {
         for (x = 0; x < this.width; x++) {
           this.getTile(x, y).render(
             _g,
-            x * Tile.TILEWIDTH,
-            y * Tile.TILEHEIGHT
+            x * Tile.TILEWIDTH - this.handler.getGameCamera().getxOffset(),
+            y * Tile.TILEHEIGHT - this.handler.getGameCamera().getyOffset()
           );
         }
       }

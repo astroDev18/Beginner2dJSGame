@@ -9,7 +9,7 @@ define(["State", "Player", "TileLoader", "World"], function (
   var GameState = State.extend({
     init: function (_handler) {
       this._super(_handler);
-      this.player = new Player(_handler, 20, 20);
+      this.player = new Player(_handler, 43, 43);
       this.world = new World("res/worlds/world1.wrd", _handler);
     },
 

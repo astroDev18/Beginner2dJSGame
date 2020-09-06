@@ -35,7 +35,9 @@ define(["Entity", "Tile"], function (Entity, Tile) {
             )
           )
         ) {
-          this.x += parseInt(this.xMove);
+          this.x += this.xMove;
+        } else {
+          this.x = tx * Tile.TILEWIDTH - this.bounds.x - this.bounds.width - 1;
         }
       } else {
         var tx = parseInt(
@@ -53,7 +55,9 @@ define(["Entity", "Tile"], function (Entity, Tile) {
             )
           )
         ) {
-          this.x += parseInt(this.xMove);
+          this.x += this.xMove;
+        } else {
+          this.x = tx * Tile.TILEWIDTH + Tile.TILEWIDTH - this.bounds.x;
         }
       }
     },
@@ -76,7 +80,10 @@ define(["Entity", "Tile"], function (Entity, Tile) {
             ty
           )
         ) {
-          this.y += parseInt(this.yMove);
+          this.y += this.yMove;
+        } else {
+          this.y =
+            ty * Tile.TILEHEIGHT - this.bounds.y - this.bounds.height - 1;
         }
       } else {
         var ty = parseInt(
@@ -94,7 +101,9 @@ define(["Entity", "Tile"], function (Entity, Tile) {
             ty
           )
         ) {
-          this.y += parseInt(this.yMove);
+          this.y += this.yMove;
+        } else {
+          this.y = ty * Tile.TILEHEIGHT + Tile.TILEHEIGHT - this.bounds.y;
         }
       }
     },

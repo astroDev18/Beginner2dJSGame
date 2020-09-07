@@ -1,10 +1,30 @@
-define(["Class", "TileLoader", "Utils"], function (Class, Tile, Utils) {
+define([
+  "Class",
+  "TileLoader",
+  "Utils",
+  "EntityManager",
+  "Player",
+  "Tree",
+], function (Class, Tile, Utils, EntityManager, Player, Tree) {
   var World = Class.extend({
     init: function (_path, _handler) {
       this.tiles = [];
       this.loadWorld(_path);
       this.handler = _handler;
       _handler.setWorld(this);
+      this.entityManager = new EntityManager(
+        _handler,
+        new Player(_handler, 100, 100)
+      );
+      this.entityManager.addEntity(new Tree(_handler, 100, 400));
+
+      this.entityManager.addEntity(new Tree(_handler, 100, 700));
+
+      this.entityManager.addEntity(new Tree(_handler, 700, 400));
+
+      this.entityManager.addEntity(new Tree(_handler, 700, 700));
+      this.entityManager.getPlayer().setX(this.spawnX);
+      this.entityManager.getPlayer().setY(this.spawnY);
     },
     loadWorld: function (_path) {
       var file = Utils.loadFileAsString(_path);
@@ -20,7 +40,9 @@ define(["Class", "TileLoader", "Utils"], function (Class, Tile, Utils) {
         }
       }
     },
-    tick: function (_dt) {},
+    tick: function (_dt) {
+      this.entityManager.tick(_dt);
+    },
     render: function (_g) {
       var xStart = parseInt(
         Math.max(0, this.handler.getGameCamera().getxOffset() / Tile.TILEWIDTH)
@@ -56,6 +78,7 @@ define(["Class", "TileLoader", "Utils"], function (Class, Tile, Utils) {
           );
         }
       }
+      this.entityManager.render(_g);
     },
 
     getTile: function (_x, _y) {

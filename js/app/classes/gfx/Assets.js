@@ -119,6 +119,10 @@ define(["Class", "ImageLoader", "SpriteSheet", "Animation"], function (
   player.addAnimation("walk_down", new Animation(walkdownframes));
   player.addAnimation("idle", new Animation(idleframes));
 
+  // Tree Asset
+  var tree = new Assets("tree", "res/textures/tree_01.png", 725, 798);
+  tree.redwood = tree.sheet.crop(0, 0, 726, 798);
+
   //Tile Asset
   var tiles = new Assets("tiles", "res/textures/tiles.png", 30, 30);
   tiles.dirt = tiles.sheet.crop(

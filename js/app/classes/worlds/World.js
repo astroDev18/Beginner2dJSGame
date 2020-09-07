@@ -1,10 +1,17 @@
-define(["Class", "TileLoader", "Utils"], function (Class, Tile, Utils) {
+define(["Class", "TileLoader", "Utils", "Tree"], function (
+  Class,
+  Tile,
+  Utils,
+  Tree
+) {
+  var tree;
   var World = Class.extend({
     init: function (_path, _handler) {
       this.tiles = [];
       this.loadWorld(_path);
       this.handler = _handler;
       _handler.setWorld(this);
+      tree = new Tree(_handler, 40, 50);
     },
     loadWorld: function (_path) {
       var file = Utils.loadFileAsString(_path);
@@ -55,6 +62,7 @@ define(["Class", "TileLoader", "Utils"], function (Class, Tile, Utils) {
             y * Tile.TILEHEIGHT - this.handler.getGameCamera().getyOffset()
           );
         }
+        tree.render(_g);
       }
     },
 

@@ -1,4 +1,4 @@
-define(["Entity", "Tile"], function (Entity, Tile) {
+define(["Entity", "Tile", "Rectangle"], function (Entity, Tile, Rectangle) {
   var DEFAULT_SPEED = 250,
     DEFAULT_HEALTH = 10,
     DEFAULT_CREATURE_WIDTH = 64,
@@ -14,9 +14,43 @@ define(["Entity", "Tile"], function (Entity, Tile) {
       this.yMove = 0;
     },
     move: function () {
-      // before we update check if new position will collide, if it doesn't then allow movmeent
-      if (!this.checkEntityCollisions(this.xMove, 0)) this.moveX();
-      if (!this.checkEntityCollisions(0, this.yMove)) this.moveY();
+      // only if we are moving
+      if (Math.abs(this.xMove) > 0 || Math.abs(this.yMove) > 0) {
+        // remove ourselves at the current grid square and reinsert ourselves
+        // adding ourself to a new square we moved in
+        // only if we have moved at all, and only if we don't already exist in that square
+        this.handler
+          .getWorld()
+          .getSpatialGrid()
+          .remove(
+            new Rectangle(
+              this.x + this.bounds.x,
+              this.y + this.bounds.y,
+              this.bounds.width,
+              this.bounds.height
+            ),
+            this
+          );
+        // before we update check if new position will collide, if it doesn't then allow movmeent
+        if (!this.checkEntityCollisions(this.xMove, 0)) this.moveX();
+        if (!this.checkEntityCollisions(0, this.yMove)) this.moveY();
+        this.handler
+          .getWorld()
+          .getSpatialGrid()
+          .insert(
+            new Rectangle(
+              this.x + this.bounds.x,
+              this.y + this.bounds.y,
+              this.bounds.width,
+              this.bounds.height
+            ),
+            this
+          );
+      }
+    },
+    moveX: function () {
+      if (this.xMove > 0) {
+      }
     },
     moveX: function () {
       if (this.xMove > 0) {

@@ -5,16 +5,23 @@ define([
   "EntityManager",
   "Player",
   "Tree",
-], function (Class, Tile, Utils, EntityManager, Player, Tree) {
+  "SpatialGrid",
+], function (Class, Tile, Utils, EntityManager, Player, Tree, SpatialGrid) {
   var World = Class.extend({
     init: function (_path, _handler) {
       this.tiles = [];
-      this.loadWorld(_path);
+
       this.handler = _handler;
       _handler.setWorld(this);
       this.entityManager = new EntityManager(
         _handler,
         new Player(_handler, 100, 100)
+      );
+      this.loadWorld(_path);
+      this.spatialGrid = new SpatialGrid(
+        this.width * Tile.TILEWIDTH,
+        this.height * Tile.TILEHEIGHT,
+        75
       );
       this.entityManager.addEntity(new Tree(_handler, 100, 400));
 
@@ -92,6 +99,9 @@ define([
     },
     getEntityManager: function () {
       return this.entityManager;
+    },
+    getSpatialGrid: function () {
+      return this.spatialGrid;
     },
   });
   return World;

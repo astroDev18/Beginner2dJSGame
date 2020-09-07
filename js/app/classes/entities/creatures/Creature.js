@@ -14,8 +14,9 @@ define(["Entity", "Tile"], function (Entity, Tile) {
       this.yMove = 0;
     },
     move: function () {
-      this.moveX();
-      this.moveY();
+      // before we update check if new position will collide, if it doesn't then allow movmeent
+      if (!this.checkEntityCollisions(this.xMove, 0)) this.moveX();
+      if (!this.checkEntityCollisions(0, this.yMove)) this.moveY();
     },
     moveX: function () {
       if (this.xMove > 0) {

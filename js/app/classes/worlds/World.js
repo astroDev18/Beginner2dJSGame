@@ -90,6 +90,9 @@ define([
     getHeight: function () {
       return this.height;
     },
+    getEntityManager: function () {
+      return this.entityManager;
+    },
   });
   return World;
 });

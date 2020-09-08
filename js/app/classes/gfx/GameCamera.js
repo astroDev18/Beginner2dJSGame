@@ -30,7 +30,7 @@ define(["Class", "Tile"], function (Class, Tile) {
     },
     setyOffset: function (_offset) {
       yOffset = _offset;
-      // this.checkBlankSpace();
+      this.checkBlankSpace();
     },
     checkBlankSpace: function () {
       if (xOffset < 0) {

@@ -23,6 +23,9 @@ define(["Jquery", "Class"], function ($, Class) {
     getGraphics: function () {
       return graphics;
     },
+    getCanvas: function () {
+      return canvas;
+    },
   });
 
   // Private Method
@@ -35,7 +38,8 @@ define(["Jquery", "Class"], function ($, Class) {
       "' height='" +
       height +
       "'></canvas>";
-    graphics = document.getElementById("canvas").getContext("2d");
+    canvas = document.getElementById("canvas");
+    graphics = canvas.getContext("2d");
   }
 
   // Getters

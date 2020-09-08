@@ -49,7 +49,9 @@ define(["Class"], function (Class) {
             // we push them into a central entities array 'var entities = []'
             // once we add all possible entities that could possibly collide we return enteties,
             // which are essentially our candidates for collision since they are near our current entity
-            if (e !== _ent) entities.push(e);
+            // also checks to see if an instance of e exists in the array, if it does it'll give an index from 0 to max index
+            // and if it doesn't already exist it returns -1 and if it does exist it'll push into the entity array
+            if (e !== _ent && entities.indexOf(e) == -1) entities.push(e);
           });
         }
       }

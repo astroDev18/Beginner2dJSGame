@@ -11,8 +11,11 @@ define(["Class", "Rectangle"], function (Class, Rectangle) {
     tick: function (_dt) {
       throw "Entities Must Have a Tick Function";
     },
-    render: function (_g) {
+    render: function () {
       throw "Entities Must Have a Tick Function";
+    },
+    click: function () {
+      throw "Entities Must Have a Click Function";
     },
     // Getters
     getX: function () {
@@ -50,7 +53,6 @@ define(["Class", "Rectangle"], function (Class, Rectangle) {
           ),
           this
         );
-      console.log(candidates.length);
       for (var i = 0; i < candidates.length; i++) {
         var e = candidates[i];
         if (e != this) {

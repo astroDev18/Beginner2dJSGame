@@ -12,6 +12,9 @@ define(["State", "World"], function (State, World) {
     render: function (_g) {
       this.world.render(_g);
     },
+    click: function (_btn) {
+      this.world.click(_btn);
+    },
   });
 
   return GameState;

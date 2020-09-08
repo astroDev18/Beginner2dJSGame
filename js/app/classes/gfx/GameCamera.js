@@ -24,11 +24,13 @@ define(["Class", "Tile"], function (Class, Tile) {
       return parseInt(yOffset);
     },
     // Setters
-    setxOffset: function () {
+    setxOffset: function (_offset) {
       xOffset = _offset;
+      this.checkBlankSpace();
     },
-    setyOffset: function () {
+    setyOffset: function (_offset) {
       yOffset = _offset;
+      // this.checkBlankSpace();
     },
     checkBlankSpace: function () {
       if (xOffset < 0) {

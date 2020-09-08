@@ -18,6 +18,7 @@ define([
         new Player(_handler, 100, 100)
       );
       this.loadWorld(_path);
+      this.startDrag = {};
       this.spatialGrid = new SpatialGrid(
         this.width * Tile.TILEWIDTH,
         this.height * Tile.TILEHEIGHT,
@@ -48,6 +49,7 @@ define([
       }
     },
     tick: function (_dt) {
+      this.getMouseInput();
       this.entityManager.tick(_dt);
     },
     render: function (_g) {
@@ -87,7 +89,19 @@ define([
       }
       this.entityManager.render(_g);
     },
-
+    click: function (_btn) {
+      // only happens on click so it does not continue to update the drag
+      if (_btn == "middle") {
+        var pos = this.handler.getMouseManager().getMousePosition();
+        // add to handler the position that's been offset since x position of mouse is not increasing while scrolling
+        this.startDrag = {
+          // might be source of issue
+          x: pos.x + this.handler.getGameCamera().getxOffset(),
+          y: pos.y + this.handler.getGameCamera().getyOffset(),
+        };
+      }
+      this.entityManager.click(_btn);
+    },
     getTile: function (_x, _y) {
       return Tile.tiles[this.tiles[_x][_y]];
     },
@@ -102,6 +116,15 @@ define([
     },
     getSpatialGrid: function () {
       return this.spatialGrid;
+    },
+    // this is ran every tick so it will keep updating drag, should allow us to click and move
+    // and when we release stop dragging
+    getMouseInput: function () {
+      var pos = this.handler.getMouseManager().getMousePosition();
+      if (this.handler.getMouseManager().middle) {
+        this.handler.getGameCamera().setxOffset(this.startDrag.x - pos.x);
+        this.handler.getGameCamera().setyOffset(this.startDrag.y - pos.y);
+      }
     },
   });
   return World;

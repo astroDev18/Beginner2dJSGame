@@ -6,6 +6,7 @@ define([
   "KeyManager",
   "Handler",
   "GameCamera",
+  "MouseManager",
 ], function (
   Class,
   Display,
@@ -13,11 +14,20 @@ define([
   GameState,
   KeyManager,
   Handler,
-  GameCamera
+  GameCamera,
+  MouseManager
 ) {
   var _this;
   var running = false;
-  var title, width, height, g, display, keyManager, handler, gameCamera;
+  var title,
+    width,
+    height,
+    g,
+    mouseManager,
+    display,
+    keyManager,
+    handler,
+    gameCamera;
   var gameState, menuState, settingsState;
 
   var Game = Class.extend({
@@ -26,7 +36,6 @@ define([
       title = _title;
       width = _width;
       height = _height;
-      keyManager = new KeyManager();
     },
     run: function () {
       init();
@@ -62,6 +71,12 @@ define([
     getKeyManager: function () {
       return keyManager;
     },
+    getMouseManager: function () {
+      return mouseManager;
+    },
+    getDisplay: function () {
+      return display;
+    },
 
     getWidth: function () {
       return width;
@@ -73,11 +88,18 @@ define([
     getGameCamera: function () {
       return gameCamera;
     },
+    click: function (_btn) {
+      if (State.getState() != null) {
+        State.getState().click(_btn);
+      }
+    },
   });
   function init() {
-    display = new Display(title, width, height);
-    g = display.getGraphics();
     handler = new Handler(_this);
+    display = new Display(title, width, height);
+    keyManager = new KeyManager();
+    mouseManager = new MouseManager(handler);
+    g = display.getGraphics();
     gameCamera = new GameCamera(handler, 0, 0);
     gameState = new GameState(handler);
     State.setState(gameState);
@@ -85,6 +107,7 @@ define([
 
   function tick(_dt) {
     keyManager.tick();
+    mouseManager.tick();
     if (State.getState() != null) {
       State.getState().tick(_dt);
     }

@@ -14,14 +14,29 @@ define(["Class"], function (Class) {
     getKeyManager: function () {
       return game.getKeyManager();
     },
+    getMouseManager: function () {
+      return game.getMouseManager();
+    },
+    getDisplay: function () {
+      return display;
+    },
+    getMouseManager: function () {
+      return game.getMouseManager();
+    },
     getGameCamera: function () {
       return game.getGameCamera();
     },
     getWorld: function () {
       return world;
     },
+    getDisplay: function () {
+      return game.getDisplay();
+    },
     setWorld: function (_world) {
       world = _world;
+    },
+    click: function (_btn) {
+      game.click(_btn);
     },
   });
 

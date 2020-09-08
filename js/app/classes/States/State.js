@@ -5,8 +5,18 @@ define(["Class"], function (Class) {
     init: function (_handler) {
       this.handler = _handler;
     },
-    tick: function (_dt) {},
-    render: function (_g) {},
+    tick: function (_dt) {
+      throw "Every state needs a tick";
+    },
+    render: function (_g) {
+      throw "Every state needs a render";
+    },
+    click: function () {
+      throw "Every state needs a click";
+    },
+    click: function (_btn) {
+      this.world.click(_btn);
+    },
   });
 
   State.getState = function () {

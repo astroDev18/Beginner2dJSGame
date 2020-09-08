@@ -3,6 +3,7 @@ define(["Entity"], function (Entity) {
     init: function (_handler, _x, _y, _width, _height) {
       this._super(_handler, _x, _y, _width, _height);
     },
+    click: function () {},
   });
   return StaticEntity;
 });

@@ -95,7 +95,6 @@ define([
         var pos = this.handler.getMouseManager().getMousePosition();
         // add to handler the position that's been offset since x position of mouse is not increasing while scrolling
         this.startDrag = {
-          // might be source of issue
           x: pos.x + this.handler.getGameCamera().getxOffset(),
           y: pos.y + this.handler.getGameCamera().getyOffset(),
         };

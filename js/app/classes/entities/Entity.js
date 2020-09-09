@@ -8,7 +8,7 @@ define(["Class", "Rectangle"], function (Class, Rectangle) {
       this.handler = _handler;
       this.bounds = new Rectangle(0, 0, _width, _height);
     },
-    tick: function (_dt) {
+    tick: function () {
       throw "Entities Must Have a Tick Function";
     },
     render: function () {
@@ -17,7 +17,7 @@ define(["Class", "Rectangle"], function (Class, Rectangle) {
     click: function () {
       throw "Entities Must Have a Click Function";
     },
-    // Getters
+    //Getters
     getX: function () {
       return this.x;
     },
@@ -30,8 +30,6 @@ define(["Class", "Rectangle"], function (Class, Rectangle) {
     getHeight: function () {
       return this.height;
     },
-    // gets collison of entity before moving character at the boundary of box at next tick
-    // if true no movement (collision) else allow movement
     getCollisionBounds: function (xOffset, yOffset) {
       return new Rectangle(
         parseInt(this.x + this.bounds.x + xOffset),
@@ -53,6 +51,7 @@ define(["Class", "Rectangle"], function (Class, Rectangle) {
           ),
           this
         );
+      console.log(candidates.length);
       for (var i = 0; i < candidates.length; i++) {
         var e = candidates[i];
         if (e != this) {
@@ -67,7 +66,7 @@ define(["Class", "Rectangle"], function (Class, Rectangle) {
       }
       return false;
     },
-    // Setters
+    //Setters
     setX: function (_x) {
       this.x = _x;
     },
@@ -79,6 +78,16 @@ define(["Class", "Rectangle"], function (Class, Rectangle) {
     },
     setHeight: function (_height) {
       this.height = _height;
+    },
+    getDistance: function (_ent) {
+      var xdist = this.x - _ent.x;
+      var ydist = this.y - _ent.y;
+      return Math.sqrt(xdist * xdist + ydist * ydist);
+    },
+    getAngleTo: function (_ent) {
+      var xdist = _ent.x - this.x;
+      var ydist = _ent.y - this.y;
+      return Math.atan2(ydist, xdist);
     },
   });
 

@@ -43,8 +43,8 @@ define(["Class", "Rectangle"], function (Class, Rectangle) {
         .getSpatialGrid()
         .insert(
           new Rectangle(
-            e.clientX + e.bounds.x,
-            e.clientY + e.bounds.y,
+            e.x + e.bounds.x,
+            e.y + e.bounds.y,
             e.bounds.width,
             e.bounds.height
           ),

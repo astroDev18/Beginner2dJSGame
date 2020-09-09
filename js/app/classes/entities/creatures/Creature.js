@@ -152,6 +152,19 @@ define(["Entity", "Tile", "Rectangle"], function (Entity, Tile, Rectangle) {
     getSpeed: function () {
       return this.speed;
     },
+    // gives current absolute speed regardless of direction by giving us distance travelled since last check essentially speed
+    // so we check every tick and if his speed becomes slow we start timing it how long has he not been moving then we assume something happen and we stop him or go to the next position
+    // so he doesn't just keep running forever when he cannot find a path
+    getMovementSpeed: function () {
+      this.lastX = this.currentX || this.x;
+      this.lastY = this.currentY || this.y;
+      this.currentX = this.x;
+      this.currentY = this.y;
+      var speedX = this.currentX - this.lastX;
+      var speedY = this.currentY - this.lastY;
+      return Math.sqrt(speedX * speedX + speedY * speedY);
+    },
+    // setters
     setHealth: function (_health) {
       this.health = _health;
     },

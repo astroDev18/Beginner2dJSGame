@@ -13,9 +13,12 @@ define(["Creature", "Assets"], function (Creature, Assets) {
       this.bounds.y = 32;
       this.bounds.width = 25;
       this.bounds.height = 32;
+      this.path = [];
+      this.timestopped = 0;
     },
     tick: function (_dt) {
-      this.getInput(_dt);
+      // this.getInput(_dt);
+      this.followPath(_dt);
       this.move();
       // this.handler.getGameCamera().centerOnEntity(this);
       this.assets.animations.walk_right.tick();
@@ -33,7 +36,43 @@ define(["Creature", "Assets"], function (Creature, Assets) {
         this.height
       );
     },
-    click: function (_btn) {},
+    click: function (_btn) {
+      // get mouse position, add to it the camera offsets, push that new position into the array,
+      // which causes length of array to be greater then 0 so it runs this function
+      // then run else which splices the current waypoint of the array which could cause it to be empty and stop the character
+      if (_btn === "right") {
+        var pos = this.handler.getMouseManager().getMousePosition();
+        var waypoint = {
+          x: pos.x + this.handler.getGameCamera().getxOffset() - this.width / 2,
+          y:
+            pos.y + this.handler.getGameCamera().getyOffset() - this.height / 2,
+        };
+        this.path.push(waypoint);
+      }
+    },
+    // create object and push into array which have x and y cords and angle to tell the player which way to go
+
+    followPath: function (_dt) {
+      if (this.path.length > 0) {
+        var path = this.path[0];
+
+        if (this.getDistance(path) >= 10 && this.timeStopped < 0.5) {
+          if (this.getMovementSpeed() < 0.2) {
+            this.timeStopped += 1 * _dt;
+          }
+
+          var angle = this.getAngleTo(path);
+          this.xMove = Math.cos(angle) * this.speed * _dt;
+          this.yMove = Math.sin(angle) * this.speed * _dt;
+        } else {
+          this.timeStopped = 0;
+          this.path.splice(0, 1);
+        }
+      } else {
+        this.xMove = 0;
+        this.yMove = 0;
+      }
+    },
 
     getInput: function (_dt) {
       this.xMove = 0;
@@ -52,13 +91,22 @@ define(["Creature", "Assets"], function (Creature, Assets) {
       }
     },
     getCurrentAnimationFrame: function () {
-      if (this.xMove < 0) {
+      if (this.xMove < 0 && Math.abs(this.xMove) > Math.abs(this.yMove)) {
         return this.assets.animations.walk_left.getCurrentFrame();
-      } else if (this.xMove > 0) {
+      } else if (
+        this.xMove > 0 &&
+        Math.abs(this.xMove) > Math.abs(this.yMove)
+      ) {
         return this.assets.animations.walk_right.getCurrentFrame();
-      } else if (this.yMove < 0) {
+      } else if (
+        this.yMove < 0 &&
+        Math.abs(this.xMove) < Math.abs(this.yMove)
+      ) {
         return this.assets.animations.walk_up.getCurrentFrame();
-      } else if (this.yMove > 0) {
+      } else if (
+        this.yMove > 0 &&
+        Math.abs(this.xMove) < Math.abs(this.yMove)
+      ) {
         return this.assets.animations.walk_down.getCurrentFrame();
       } else {
         return this.assets.animations.idle.getCurrentFrame();

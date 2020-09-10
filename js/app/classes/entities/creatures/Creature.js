@@ -1,6 +1,6 @@
 define(["Entity", "Tile", "Rectangle"], function (Entity, Tile, Rectangle) {
   var DEFAULT_SPEED = 250,
-    DEFAULT_HEALTH = 10,
+    DEFAULT_HEALTH = 100,
     DEFAULT_CREATURE_WIDTH = 64,
     DEFAULT_CREATURE_HEIGHT = 64;
   // Creature Variables
@@ -165,6 +165,19 @@ define(["Entity", "Tile", "Rectangle"], function (Entity, Tile, Rectangle) {
       return Math.sqrt(speedX * speedX + speedY * speedY);
     },
     // setters
+    // later we will call a event listener in the healthbar for updates so we can call an event whenever we take damage
+    takeDamage: function (_damage) {
+      this.health -= _damage;
+      if (typeof this.healthbar != "undefined") {
+        this.healthbar.update();
+      }
+      if (this.health <= 0) {
+        this.die();
+      }
+    },
+    die: function () {
+      this.healthbar.opacity = 0;
+    },
     setHealth: function (_health) {
       this.health = _health;
     },

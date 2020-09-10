@@ -1,4 +1,8 @@
-define(["Creature", "Assets"], function (Creature, Assets) {
+define(["Creature", "Assets", "HealthBar"], function (
+  Creature,
+  Assets,
+  HealthBar
+) {
   var Player = Creature.extend({
     init: function (_handler, _x, _y) {
       this._super(
@@ -15,6 +19,25 @@ define(["Creature", "Assets"], function (Creature, Assets) {
       this.bounds.height = 32;
       this.path = [];
       this.timestopped = 0;
+      var hb_prop = {
+        // light grey
+        color: "#ccc",
+        yoffset: 20,
+        // nodes
+        nodes: 100,
+        split: 0,
+        width: 100,
+        height: 8,
+        // fadetime: 0.96,
+        // render on full health
+        renderOnFull: "on",
+        border: {
+          show: true,
+          color: "#333",
+          width: 2,
+        },
+      };
+      this.healthbar = new HealthBar(_handler, this, hb_prop);
     },
     tick: function (_dt) {
       // this.getInput(_dt);
@@ -33,7 +56,8 @@ define(["Creature", "Assets"], function (Creature, Assets) {
         this.x - this.handler.getGameCamera().getxOffset(),
         this.y - this.handler.getGameCamera().getyOffset(),
         this.width,
-        this.height
+        this.height,
+        this.healthbar.render(_g)
       );
     },
     click: function (_btn) {

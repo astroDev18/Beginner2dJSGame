@@ -51,7 +51,6 @@ define(["Class", "Rectangle"], function (Class, Rectangle) {
           ),
           this
         );
-      console.log(candidates.length);
       for (var i = 0; i < candidates.length; i++) {
         var e = candidates[i];
         if (e != this) {

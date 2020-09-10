@@ -18,6 +18,8 @@ requirejs.config({
     GameState: "app/classes/states/GameState",
     GrassTile: "app/classes/tiles/GrassTile",
     Handler: "app/classes/Handler",
+    HealthBar: "app/classes/entities/helpers/HealthBar",
+    Helper: "app/classes/entities/helpers/Helper",
     ImageLoader: "app/classes/gfx/ImageLoader",
     KeyManager: "app/classes/input/KeyManager",
     Launcher: "app/classes/Launcher",

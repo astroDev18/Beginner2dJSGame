@@ -20,9 +20,9 @@ define(["Helper"], function (Helper) {
       this.opacity = _prop.opacity || 1;
       this.border = _prop.border || { show: true, color: "black", width: 3 };
       //   test if damage is working
-      //     setInterval(function () {
-      //       _ent.takeDamage(10);
-      //     }, 1000);
+      // setInterval(function () {
+      //   _ent.takeDamage(10);
+      // }, 1000);
     },
     render: function (_g) {
       this.opacity *= this.fadetime;
@@ -34,31 +34,31 @@ define(["Helper"], function (Helper) {
           // creates node aligned to correct offsets for character
           _g.fillRect(
             this.ent.getX() -
-              this.xoff -
-              this.handler.getGameCamera().getxOffset() -
-              this.border.width,
+            this.xoff -
+            this.handler.getGameCamera().getxOffset() -
+            this.border.width,
             this.ent.getY() -
-              this.yoff -
-              this.handler.getGameCamera().getyOffset() -
-              this.border.width,
+            this.yoff -
+            this.handler.getGameCamera().getyOffset() -
+            this.border.width,
             this.width + this.border.width * 2,
             this.height + this.border.width * 2
           );
           // renders all health nodes, even unhealthy ones
           for (var i = 0; i < this.totalnodes; i++) {
             _g.globalAlpha = 0.5 * this.opacity;
-            _g.fillStyle = this.color;
+            _g.fillStyle = this.border.color;
             _g.fillRect(
               -(this.nodewidth * this.totalnodes) +
-                this.split / 2 +
-                this.totalnodes * this.nodewidth +
-                this.nodewidth * i +
-                this.ent.getX() -
-                this.xoff -
-                this.handler.getGameCamera().getxOffset(),
+              this.split / 2 +
+              this.totalnodes * this.nodewidth +
+              this.nodewidth * i +
+              this.ent.getX() -
+              this.xoff -
+              this.handler.getGameCamera().getxOffset(),
               this.ent.getY() -
-                this.yoff -
-                this.handler.getGameCamera().getyOffset(),
+              this.yoff -
+              this.handler.getGameCamera().getyOffset(),
               this.nodewidth - this.split,
               this.height,
               (_g.globalAlpha = 1 * this.opacity)
@@ -69,15 +69,15 @@ define(["Helper"], function (Helper) {
             _g.fillStyle = this.color;
             _g.fillRect(
               -(this.nodewidth * this.totalnodes) +
-                this.split / 2 +
-                this.totalnodes * this.nodewidth +
-                this.nodewidth * i +
-                this.ent.getX() -
-                this.xoff -
-                this.handler.getGameCamera().getxOffset(),
+              this.split / 2 +
+              this.totalnodes * this.nodewidth +
+              this.nodewidth * i +
+              this.ent.getX() -
+              this.xoff -
+              this.handler.getGameCamera().getxOffset(),
               this.ent.getY() -
-                this.yoff -
-                this.handler.getGameCamera().getyOffset(),
+              this.yoff -
+              this.handler.getGameCamera().getyOffset(),
               this.nodewidth - this.split,
               this.height
             );

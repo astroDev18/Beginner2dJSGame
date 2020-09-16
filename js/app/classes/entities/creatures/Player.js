@@ -21,7 +21,7 @@ define(["Creature", "Assets", "HealthBar"], function (
       this.timestopped = 0;
       var hb_prop = {
         // light grey
-        color: "#008900",
+        color: "#ccc",
         yoffset: 20,
         // nodes
         nodes: 100,

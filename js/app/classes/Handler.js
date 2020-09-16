@@ -20,9 +20,6 @@ define(["Class"], function (Class) {
     getDisplay: function () {
       return display;
     },
-    getMouseManager: function () {
-      return game.getMouseManager();
-    },
     getGameCamera: function () {
       return game.getGameCamera();
     },

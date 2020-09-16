@@ -1,7 +1,9 @@
-define(["Creature", "Assets", "HealthBar"], function (
+define(["Creature", "Assets", "Astar", "HealthBar", "Rectangle"], function (
   Creature,
   Assets,
-  HealthBar
+  Astar,
+  HealthBar,
+  Rectangle
 ) {
   var Player = Creature.extend({
     init: function (_handler, _x, _y) {
@@ -38,6 +40,7 @@ define(["Creature", "Assets", "HealthBar"], function (
         },
       };
       this.healthbar = new HealthBar(_handler, this, hb_prop);
+      this.astar = new Astar(500, _handler, this.height + 40, this, this, 100);
     },
     tick: function (_dt) {
       // this.getInput(_dt);
@@ -51,6 +54,7 @@ define(["Creature", "Assets", "HealthBar"], function (
       this.assets.animations.idle.tick();
     },
     render: function (_g) {
+      this.astar.render(_g);
       _g.myDrawImage(
         this.getCurrentAnimationFrame(),
         this.x - this.handler.getGameCamera().getxOffset(),
@@ -64,18 +68,21 @@ define(["Creature", "Assets", "HealthBar"], function (
       // get mouse position, add to it the camera offsets, push that new position into the array,
       // which causes length of array to be greater then 0 so it runs this function
       // then run else which splices the current waypoint of the array which could cause it to be empty and stop the character
-      if (_btn === "right") {
-        var pos = this.handler.getMouseManager().getMousePosition();
-        var waypoint = {
-          x: pos.x + this.handler.getGameCamera().getxOffset() - this.width / 2,
-          y:
-            pos.y + this.handler.getGameCamera().getyOffset() - this.height / 2,
-        };
-        this.path.push(waypoint);
+      // var pos = this.handler.getMouseManager().getMousePositon();
+      var pos = this.handler.getMouseManager().getMousePosition();
+      pos.x += this.handler.getGameCamera().getxOffset();
+      pos.y += this.handler.getGameCamera().getyOffset();
+      var mouseBox = new Rectangle(pos.x, pos.y, 2, 2);
+      if (_btn == "right") {
+        this.astar.updateStart(this.x + this.width / 2, this.y + this.height / 2);
+        this.astar.updateGoal(pos.x, pos.y);
+        this.astar.findPath();
       }
     },
     // create object and push into array which have x and y cords and angle to tell the player which way to go
-
+    setPath: function (_path) {
+      this.path(_path);
+    },
     followPath: function (_dt) {
       if (this.path.length > 0) {
         var path = this.path[0];

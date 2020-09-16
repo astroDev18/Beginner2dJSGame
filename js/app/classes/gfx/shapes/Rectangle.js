@@ -12,8 +12,7 @@ define(["Class"], function (Class) {
         this.x < _rect.x + _rect.width &&
         this.x + this.width > _rect.x &&
         this.y < _rect.y + _rect.height &&
-        this.y + this.height > _rect.y
-      ) {
+        this.y + this.height > _rect.y) {
         return true;
       }
       return false;

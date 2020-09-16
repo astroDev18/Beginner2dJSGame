@@ -56,7 +56,7 @@ define(["Entity", "Tile", "Rectangle"], function (Entity, Tile, Rectangle) {
       if (this.xMove > 0) {
         var tx = parseInt(
           (this.x + this.xMove + this.bounds.x + this.bounds.width) /
-            Tile.TILEWIDTH
+          Tile.TILEWIDTH
         );
         if (
           !this.collisionWithTile(
@@ -101,7 +101,7 @@ define(["Entity", "Tile", "Rectangle"], function (Entity, Tile, Rectangle) {
       if (this.yMove > 0) {
         var ty = parseInt(
           (this.y + this.yMove + this.bounds.y + this.bounds.height) /
-            Tile.TILEHEIGHT
+          Tile.TILEHEIGHT
         );
         if (
           !this.collisionWithTile(

@@ -17,6 +17,7 @@ requirejs.config({
     GameCamera: "app/classes/gfx/GameCamera",
     GameState: "app/classes/states/GameState",
     GrassTile: "app/classes/tiles/GrassTile",
+    BrickTile: "app/classes/tiles/BrickTile",
     Handler: "app/classes/Handler",
     HealthBar: "app/classes/entities/helpers/HealthBar",
     Helper: "app/classes/entities/helpers/Helper",
@@ -36,6 +37,7 @@ requirejs.config({
     Tree: "app/classes/entities/statics/Tree",
     Utils: "app/classes/utils/Utils",
     World: "app/classes/worlds/World",
+
   },
 });
 

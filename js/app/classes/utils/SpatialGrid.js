@@ -87,8 +87,8 @@ define(["Class"], function (Class) {
           if (grid[x][y].length > 0) {
             // if the grid square has entities render it a different color
             // so we can tell entities are in the grid square
-            _g.fillStyle = "blue";
-            _g.fillRect(xpos, ypos, size, size);
+            // _g.fillStyle = "rgba(255, 255, 255, 0.5)";
+            // _g.fillRect(xpos, ypos, size, size);
           }
         }
       }

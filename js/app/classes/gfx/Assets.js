@@ -124,20 +124,31 @@ define(["Class", "ImageLoader", "SpriteSheet", "Animation"], function (
   tree.redwood = tree.sheet.crop(0, 0, 726, 798);
 
   //Tile Asset
-  var tiles = new Assets("tiles", "res/textures/tiles.png", 30, 30);
+  var tiles = new Assets("tiles", "res/textures/rpg.png", 32, 32);
   tiles.dirt = tiles.sheet.crop(
-    0,
-    tiles.height * 10,
+    32 * 2,
+    tiles.height * 2,
     tiles.width,
     tiles.height
   );
-  tiles.grass = tiles.sheet.crop(0, tiles.height, tiles.width, tiles.height);
+  tiles.grass = tiles.sheet.crop(
+    0,
+    tiles.height * 2,
+    tiles.width,
+    tiles.height);
   tiles.stone = tiles.sheet.crop(
-    0,
-    tiles.height * 7,
+    32 * 1,
+    tiles.height * 2,
     tiles.width,
     tiles.height
   );
+  tiles.brick = tiles.sheet.crop(
+    32 * 3,
+    tiles.height * 2,
+    tiles.width,
+    tiles.height
+  );
+
 
   return Assets;
 });
